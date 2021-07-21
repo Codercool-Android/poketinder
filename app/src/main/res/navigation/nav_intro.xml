@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_intro"
+    app:startDestination="@id/mainIntroFragment">
+
+    <fragment
+        android:id="@+id/mainIntroFragment"
+        android:name="com.abeltarazona.poketinder.presentation.ui.fragments.intro.MainIntroFragment"
+        android:label="fragment_main_intro"
+        tools:layout="@layout/fragment_main_intro" >
+        <action
+            android:id="@+id/action_mainIntroFragment_to_failIntroFragment"
+            app:destination="@id/failIntroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/failIntroFragment"
+        android:name="com.abeltarazona.poketinder.presentation.ui.fragments.intro.FailIntroFragment"
+        android:label="fragment_fail_intro"
+        tools:layout="@layout/fragment_fail_intro" >
+        <action
+            android:id="@+id/action_failIntroFragment_to_webIntroFragment"
+            app:destination="@id/webIntroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/webIntroFragment"
+        android:name="com.abeltarazona.poketinder.presentation.ui.fragments.intro.WebIntroFragment"
+        android:label="fragment_web_intro"
+        tools:layout="@layout/fragment_web_intro" />
+</navigation>
