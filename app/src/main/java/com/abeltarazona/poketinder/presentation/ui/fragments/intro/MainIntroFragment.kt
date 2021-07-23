@@ -3,6 +3,8 @@ package com.abeltarazona.poketinder.presentation.ui.fragments.intro
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.navigation.Navigation
+import com.abeltarazona.poketinder.R
 import com.abeltarazona.poketinder.databinding.FragmentMainIntroBinding
 import com.abeltarazona.poketinder.presentation.ui.fragments.BaseFragment
 
@@ -18,7 +20,7 @@ class MainIntroFragment :
         }
 
         binding.btnNo.setOnClickListener {
-            Toast.makeText(context, "PRESIONADO NO", Toast.LENGTH_SHORT).show()
+            Navigation.findNavController(it).navigate(R.id.action_mainIntroFragment_to_failIntroFragment)
         }
 
         binding.btnClose.setOnClickListener {
