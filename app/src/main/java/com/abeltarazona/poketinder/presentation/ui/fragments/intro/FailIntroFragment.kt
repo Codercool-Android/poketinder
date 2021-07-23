@@ -5,12 +5,8 @@ import com.abeltarazona.poketinder.databinding.FragmentFailIntroBinding
 import com.abeltarazona.poketinder.presentation.ui.fragments.BaseFragment
 
 
-class FailIntroFragment : BaseFragment<FragmentFailIntroBinding>() {
+class FailIntroFragment : BaseFragment<FragmentFailIntroBinding>(FragmentFailIntroBinding::inflate) {
 
-    override fun getLayoutResId(): Int = R.layout.fragment_fail_intro
 
-    override fun initView() {
-
-    }
 
 }

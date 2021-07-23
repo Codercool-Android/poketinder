@@ -1,16 +1,28 @@
 package com.abeltarazona.poketinder.presentation.ui.fragments.intro
 
-import com.abeltarazona.poketinder.R
+import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import com.abeltarazona.poketinder.databinding.FragmentMainIntroBinding
 import com.abeltarazona.poketinder.presentation.ui.fragments.BaseFragment
 
 
-class MainIntroFragment : BaseFragment<FragmentMainIntroBinding>() {
+class MainIntroFragment :
+    BaseFragment<FragmentMainIntroBinding>(FragmentMainIntroBinding::inflate) {
 
-    override fun getLayoutResId(): Int = R.layout.fragment_main_intro
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun initView() {
-        mBinding.tvTest.text = "Hola probando"
+        binding.btnYes.setOnClickListener {
+            Toast.makeText(context, "PRESIONADO YES", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnNo.setOnClickListener {
+            Toast.makeText(context, "PRESIONADO NO", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.btnClose.setOnClickListener {
+            activity?.finish()
+        }
     }
-
 }
