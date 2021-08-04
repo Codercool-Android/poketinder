@@ -9,7 +9,8 @@ import androidx.viewbinding.ViewBinding
  * Created by AbelTarazona on 22/07/2021
  */
 abstract class BaseActivity<B : ViewBinding>(val bindingFactory: (LayoutInflater) -> B) : AppCompatActivity() {
-    private lateinit var binding: B
+
+    lateinit var binding: B
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -1,5 +1,6 @@
 package com.abeltarazona.poketinder.presentation.ui.fragments.intro
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -8,6 +9,7 @@ import com.abeltarazona.poketinder.R
 import com.abeltarazona.poketinder.databinding.FragmentMainIntroBinding
 import com.abeltarazona.poketinder.presentation.presenters.implementation.MainIntroImpl
 import com.abeltarazona.poketinder.presentation.presenters.interfaces.MainIntroPresenter
+import com.abeltarazona.poketinder.presentation.ui.activities.LoginActivity
 import com.abeltarazona.poketinder.presentation.ui.fragments.BaseFragment
 import com.zygne.zygnearchitecture.domain.executor.implementation.ThreadExecutor
 import com.zygne.zygnearchitecture.threads.AndroidThread
@@ -27,7 +29,8 @@ class MainIntroFragment :
 
         binding.btnYes.setOnClickListener {
             //Toast.makeText(context, "PRESIONADO YES", Toast.LENGTH_SHORT).show()
-            presenter.convertToWelcomeMessage("Abel Tarazona")
+            //presenter.convertToWelcomeMessage("Abel Tarazona")
+            startActivity(Intent(context, LoginActivity::class.java))
         }
 
         binding.btnNo.setOnClickListener {
