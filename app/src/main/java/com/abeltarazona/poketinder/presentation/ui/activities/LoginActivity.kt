@@ -3,12 +3,18 @@ package com.abeltarazona.poketinder.presentation.ui.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
+import com.abeltarazona.poketinder.MainActivity
+import com.abeltarazona.poketinder.data.User
 import com.abeltarazona.poketinder.databinding.ActivityLoginBinding
 import com.abeltarazona.poketinder.presentation.ui.fragments.BaseActivity
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.GraphRequest
 import com.facebook.login.LoginResult
+import com.google.gson.Gson
+import org.json.JSONException
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::inflate) {
 
@@ -36,17 +42,48 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
         binding.loginButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(result: LoginResult?) {
-                Log.d("Codercool", "onSuccess: ")
+                val token: String? = result?.accessToken?.token
+                // Call Graph API
 
-                Log.d("Codercool", result?.accessToken?.token ?: "---")
+                val request: GraphRequest = GraphRequest.newMeRequest(
+                    result?.accessToken
+                ) { obj, _ ->
+                    try {
+
+                        val idUser = obj.getString("id")
+                        val name = obj.getString("name")
+                        var email = ""
+
+                        if (obj.has("email")) {
+                            email = obj.getString("email")
+                        }
+
+                        val user = User(name = name, id = idUser, email = email)
+
+                        val intent = Intent(applicationContext, ProfileActivity::class.java)
+                        intent.putExtra("user", user)
+                        startActivity(intent)
+
+
+
+                    } catch (e: JSONException) {
+                        Log.d("Codercool", e.message.toString())
+                    }
+                }
+
+                val parameters = Bundle()
+                parameters.putString("fields", "email, name")
+                request.parameters = parameters
+                request.executeAsync()
+
             }
 
             override fun onCancel() {
-                Log.d("Codercool", "onCancel: ")
+                Toast.makeText(applicationContext, "Para poder continuar usando la app, debe iniciar sesión con Facebook", Toast.LENGTH_LONG).show()
             }
 
             override fun onError(error: FacebookException?) {
-                Log.d("Codercool", "onError: ${error?.message}")
+                Toast.makeText(applicationContext, error?.message, Toast.LENGTH_LONG).show()
             }
         })
 
