@@ -11,6 +11,7 @@ import com.abeltarazona.poketinder.presentation.presenters.implementation.MainIn
 import com.abeltarazona.poketinder.presentation.presenters.interfaces.MainIntroPresenter
 import com.abeltarazona.poketinder.presentation.ui.activities.LoginActivity
 import com.abeltarazona.poketinder.presentation.ui.fragments.BaseFragment
+import com.abeltarazona.poketinder.presentation.utils.SharedPreferenceUtil
 import com.zygne.zygnearchitecture.domain.executor.implementation.ThreadExecutor
 import com.zygne.zygnearchitecture.threads.AndroidThread
 
@@ -21,15 +22,21 @@ class MainIntroFragment :
 
     private lateinit var presenter: MainIntroPresenter
 
+    private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        sharedPreferenceUtil = SharedPreferenceUtil().also {
+            it.setSharedPreference(requireContext())
+        }
 
         presenter = MainIntroImpl(ThreadExecutor.getInstance(),
             AndroidThread.getInstance(), this)
 
         binding.btnYes.setOnClickListener {
-            //Toast.makeText(context, "PRESIONADO YES", Toast.LENGTH_SHORT).show()
             //presenter.convertToWelcomeMessage("Abel Tarazona")
+            sharedPreferenceUtil.saveIntroShow()
             startActivity(Intent(context, LoginActivity::class.java))
         }
 

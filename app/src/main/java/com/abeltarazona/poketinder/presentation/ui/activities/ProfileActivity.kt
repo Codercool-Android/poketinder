@@ -10,6 +10,7 @@ class ProfileActivity : BaseActivity<ActivityProfileBinding>(ActivityProfileBind
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // TODO: Cambiar el intent por Shared Preference
         val user = intent.getSerializableExtra("user") as User
 
         binding.tvName.text = user.name

@@ -8,6 +8,7 @@ import com.abeltarazona.poketinder.MainActivity
 import com.abeltarazona.poketinder.data.User
 import com.abeltarazona.poketinder.databinding.ActivityLoginBinding
 import com.abeltarazona.poketinder.presentation.ui.fragments.BaseActivity
+import com.abeltarazona.poketinder.presentation.utils.SharedPreferenceUtil
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -22,9 +23,15 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
     private val EMAIL = "email"
 
+    private lateinit var sharedPreferenceUtil: SharedPreferenceUtil
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        sharedPreferenceUtil = SharedPreferenceUtil().also {
+            it.setSharedPreference(this)
+        }
+
         binding.btnClose.setOnClickListener {
             finish()
         }
@@ -60,7 +67,10 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(ActivityLoginBinding::i
 
                         val user = User(name = name, id = idUser, email = email)
 
-                        val intent = Intent(applicationContext, ProfileActivity::class.java)
+                        // Guardado en sesión del usuario
+                        sharedPreferenceUtil.saveFacebookUser(user)
+
+                        val intent = Intent(applicationContext, MainActivity::class.java)
                         intent.putExtra("user", user)
                         startActivity(intent)
 
