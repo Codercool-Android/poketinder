@@ -11,11 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Poketinder">
-        <activity android:name=".presentation.ui.activities.ProfileActivity"></activity>
+        <activity
+            android:name=".presentation.ui.activities.PokemonLargeScreenActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.ui.activities.MyPokemonsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".presentation.ui.activities.DetailPokemonActivity"
+            android:exported="true" />
+        <activity android:name=".presentation.ui.activities.ProfileActivity" />
         <activity android:name=".presentation.ui.activities.LoginActivity" />
-        <activity android:name=".presentation.ui.activities.IntroActivity">
-
-        </activity>
+        <activity android:name=".presentation.ui.activities.IntroActivity" />
         <activity android:name=".presentation.ui.activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +35,9 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
         <activity
             android:name="com.facebook.FacebookActivity"

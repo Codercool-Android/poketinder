@@ -38,6 +38,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(ActivitySplashBinding
                         startActivity(Intent(this, LoginActivity::class.java))
                     }
                 }
+                finish()
             },
             3000 // value in milliseconds
         )

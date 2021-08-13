@@ -1,5 +1,6 @@
 package com.abeltarazona.poketinder.presentation.ui.adapters
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,8 +10,9 @@ import com.abeltarazona.poketinder.databinding.ItemPokemonBinding
 import com.abeltarazona.poketinder.presentation.utils.inflate
 import com.bumptech.glide.Glide
 
-class PokemonAdapter(val list: List<PokemonMock>,
-val callback: Callback) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
+class PokemonAdapter(
+    private val list: List<PokemonMock>,
+    val callback: Callback) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.item_pokemon)
@@ -31,19 +33,26 @@ val callback: Callback) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
         fun bind(pokemon: PokemonMock) {
             with(binding) {
                 root.setOnClickListener {
-                    callback.onClick(pokemon)
+                    val position = adapterPosition + 1
+
+                    val newPokemon = pokemon.copy(position = position)
+
+                    callback.onClickPokemonInformation(newPokemon)
                 }
                 tvName.text = pokemon.name
                 Glide
                     .with(itemView)
                     .load(pokemon.img)
                     .into(binding.ivPokemon)
+                if (pokemon.legendary) {
+                    ivVerified.visibility = View.VISIBLE
+                }
             }
         }
 
     }
 
     interface Callback {
-        fun onClick(pokemon: PokemonMock)
+        fun onClickPokemonInformation(pokemon: PokemonMock)
     }
 }

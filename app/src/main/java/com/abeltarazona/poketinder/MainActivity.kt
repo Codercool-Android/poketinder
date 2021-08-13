@@ -2,7 +2,7 @@ package com.abeltarazona.poketinder
 
 import android.R
 import android.app.AlertDialog
-import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import com.abeltarazona.poketinder.data.PokemonMock
 import com.abeltarazona.poketinder.data.User
 import com.abeltarazona.poketinder.databinding.ActivityMainBinding
+import com.abeltarazona.poketinder.presentation.ui.activities.DetailPokemonActivity
 import com.abeltarazona.poketinder.presentation.ui.adapters.PokemonAdapter
 import com.abeltarazona.poketinder.presentation.ui.fragments.BaseActivity
 import com.abeltarazona.poketinder.presentation.utils.Mock
-import com.bumptech.glide.Glide
 import com.yuyakaido.android.cardstackview.*
 
 class MainActivity :
@@ -28,25 +28,35 @@ class MainActivity :
 
         val user = intent.getSerializableExtra("user") as User
 
-        initialize()
+        binding.layBackButton.btnBackClose.setOnClickListener {
+            openCloseDialog()
+        }
+
+        initializeTinderCard()
 
 
     }
 
-    override fun onClick(pokemon: PokemonMock) {
+    private fun openCloseDialog() {
         AlertDialog.Builder(this)
-            .setTitle(pokemon.name)
-            .setMessage("Test") // Specifying a listener allows you to take an action before dismissing the dialog.
-            .setPositiveButton(R.string.yes
+            .setTitle("¿Está seguro de cerrar la app?")
+            .setMessage("¡Tus matchs te extrañarán!")
+            .setPositiveButton("Sí"
             ) { _, _ ->
-
+                finish()
             }
-            .setNegativeButton(R.string.no, null)
-            .setIcon(R.drawable.ic_dialog_alert)
+            .setNegativeButton("¡Me quedo!", null)
             .show()
     }
 
-    private fun initialize() {
+    override fun onClickPokemonInformation(pokemon: PokemonMock) {
+        // TODO: Open information screen
+        val intent = Intent(this, DetailPokemonActivity::class.java)
+        intent.putExtra("pokemon", pokemon)
+        startActivity(intent)
+    }
+
+    private fun initializeTinderCard() {
         manager.setStackFrom(StackFrom.None)
         manager.setVisibleCount(3)
         manager.setTranslationInterval(8.0f)

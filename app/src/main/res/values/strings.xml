@@ -1,10 +1,12 @@
 <resources>
-    <string name="app_name">Poketinder</string>
+    <string name="app_name">PokeTinder</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_intro_fail">¡Qué lastima!</string>
 
     <string name="facebook_app_id">846722802880814</string>
     <string name="fb_login_protocol_scheme">fb846722802880814</string>
+
+    <string name="textMock">Se puede ver a Bulbasaur durmiendo la siesta a la luz del sol. Hay una semilla en su espalda. Al absorber los rayos del sol, la semilla crece progresivamente.</string>
 
 </resources>
