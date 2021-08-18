@@ -11,6 +11,7 @@ import com.abeltarazona.poketinder.data.PokemonMock
 import com.abeltarazona.poketinder.data.User
 import com.abeltarazona.poketinder.databinding.ActivityMainBinding
 import com.abeltarazona.poketinder.presentation.ui.activities.DetailPokemonActivity
+import com.abeltarazona.poketinder.presentation.ui.activities.MyPokemonsActivity
 import com.abeltarazona.poketinder.presentation.ui.adapters.PokemonAdapter
 import com.abeltarazona.poketinder.presentation.ui.fragments.BaseActivity
 import com.abeltarazona.poketinder.presentation.utils.Mock
@@ -30,6 +31,10 @@ class MainActivity :
 
         binding.layBackButton.btnBackClose.setOnClickListener {
             openCloseDialog()
+        }
+
+        binding.btnMyPokemons.setOnClickListener {
+            startActivity(Intent(this, MyPokemonsActivity::class.java))
         }
 
         initializeTinderCard()

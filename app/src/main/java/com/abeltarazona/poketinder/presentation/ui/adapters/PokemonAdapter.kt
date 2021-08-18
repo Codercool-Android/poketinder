@@ -1,6 +1,5 @@
 package com.abeltarazona.poketinder.presentation.ui.adapters
 
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +11,8 @@ import com.bumptech.glide.Glide
 
 class PokemonAdapter(
     private val list: List<PokemonMock>,
-    val callback: Callback) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
+    val callback: Callback
+) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.item_pokemon)
