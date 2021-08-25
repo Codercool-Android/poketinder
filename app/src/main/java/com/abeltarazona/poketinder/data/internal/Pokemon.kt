@@ -11,6 +11,7 @@ import androidx.room.PrimaryKey
 data class Pokemon(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
+    val idPokemon: String,
     val name: String,
     val image: String,
     val isLegendary: Boolean = false,

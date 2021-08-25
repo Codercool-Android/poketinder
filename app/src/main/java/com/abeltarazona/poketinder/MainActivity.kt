@@ -1,33 +1,43 @@
 package com.abeltarazona.poketinder
 
-import android.R
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.LinearInterpolator
+import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.abeltarazona.poketinder.data.PokemonMock
 import com.abeltarazona.poketinder.data.User
+import com.abeltarazona.poketinder.data.core.response.PokemonListResponse
 import com.abeltarazona.poketinder.databinding.ActivityMainBinding
+import com.abeltarazona.poketinder.presentation.presenters.implementation.PokemonListPresenterImpl
+import com.abeltarazona.poketinder.presentation.presenters.interfaces.PokemonListPresenter
 import com.abeltarazona.poketinder.presentation.ui.activities.DetailPokemonActivity
 import com.abeltarazona.poketinder.presentation.ui.activities.MyPokemonsActivity
 import com.abeltarazona.poketinder.presentation.ui.adapters.PokemonAdapter
 import com.abeltarazona.poketinder.presentation.ui.fragments.BaseActivity
 import com.abeltarazona.poketinder.presentation.utils.Mock
 import com.yuyakaido.android.cardstackview.*
+import com.zygne.zygnearchitecture.domain.executor.implementation.ThreadExecutor
+import com.zygne.zygnearchitecture.threads.AndroidThread
 
 class MainActivity :
     BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate),
-    CardStackListener, PokemonAdapter.Callback {
+    CardStackListener, PokemonAdapter.Callback, PokemonListPresenter.Callback {
+
+    private val listPokemon = mutableListOf<PokemonListResponse.Pokemon>()
 
     private val manager by lazy {CardStackLayoutManager(this, this)}
-    private val adapter by lazy { PokemonAdapter(Mock().getPokemons(), this) }
+    private val adapter by lazy { PokemonAdapter(listPokemon, this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val user = intent.getSerializableExtra("user") as User
+
+        initializeTinderCard()
 
         binding.layBackButton.btnBackClose.setOnClickListener {
             openCloseDialog()
@@ -37,9 +47,18 @@ class MainActivity :
             startActivity(Intent(this, MyPokemonsActivity::class.java))
         }
 
-        initializeTinderCard()
+        fetchPokemonApi()
 
+    }
 
+    private fun fetchPokemonApi() {
+        val pokemonListPresenter = PokemonListPresenterImpl(
+            this,
+            ThreadExecutor.getInstance(),
+            AndroidThread.getInstance()
+        )
+
+        pokemonListPresenter.getPokemonList()
     }
 
     private fun openCloseDialog() {
@@ -54,8 +73,7 @@ class MainActivity :
             .show()
     }
 
-    override fun onClickPokemonInformation(pokemon: PokemonMock) {
-        // TODO: Open information screen
+    override fun onClickPokemonInformation(pokemon: PokemonListResponse.Pokemon) {
         val intent = Intent(this, DetailPokemonActivity::class.java)
         intent.putExtra("pokemon", pokemon)
         startActivity(intent)
@@ -83,6 +101,8 @@ class MainActivity :
         }
     }
 
+    // Card
+
     override fun onCardDragging(direction: Direction?, ratio: Float) {
     }
 
@@ -99,5 +119,24 @@ class MainActivity :
     }
 
     override fun onCardDisappeared(view: View?, position: Int) {
+    }
+
+    // Api
+
+    override fun onPokemonListSuccess(list: List<PokemonListResponse.Pokemon>) {
+        listPokemon.addAll(list)
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun showProgress() {
+        binding.progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        binding.progressBar.visibility = View.GONE
+    }
+
+    override fun onGeneralError(error: String) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
     }
 }

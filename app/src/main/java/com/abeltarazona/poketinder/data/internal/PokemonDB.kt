@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase
  * Created by AbelTarazona on 17/08/2021
  */
 
-@Database(entities = [Pokemon::class], exportSchema = false, version = 1)
+@Database(entities = [Pokemon::class], exportSchema = false, version = 2)
 abstract class PokemonDB : RoomDatabase() {
 
     abstract fun pokemonDao(): PokemonDao

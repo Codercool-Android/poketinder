@@ -1,6 +1,7 @@
 package com.abeltarazona.poketinder.data.core.response
 
 import com.abeltarazona.poketinder.presentation.utils.getIdPokemonFromUrl
+import java.io.Serializable
 
 /**
  * Created by AbelTarazona on 19/08/2021
@@ -9,18 +10,18 @@ data class PokemonListResponse(
 
     val count: Int,
 
-    val results: List<PokemonResult>
+    val results: List<Pokemon>
 
 ) {
 
-    data class PokemonResult(
+    data class Pokemon(
         val name: String,
         val url: String
-    ) {
-        fun getPokemonImage(): String {
-            val id = getIdPokemonFromUrl(url)
-            return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"
-        }
+    ) : Serializable {
+        fun getPokemonId() = getIdPokemonFromUrl(url)
+
+        fun getPokemonImage(): String =
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${getPokemonId()}.png"
     }
 
 }

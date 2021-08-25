@@ -140,6 +140,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
@@ -155,10 +156,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pokedex Data"
-            android:textStyle="bold"
             android:layout_marginBottom="5dp"
-            android:textColor="@color/green_house"/>
+            android:text="Pokedex Data"
+            android:textColor="@color/green_house"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -168,17 +169,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Especies"
-                android:textStyle="bold"
-                android:textColor="@color/dorado"/>
+                android:text="Experiencia base"
+                android:textColor="@color/dorado"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvExperienciaBase"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pokedex Data"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="10dp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -188,16 +190,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Altura"
-                android:textStyle="bold"
-                android:textColor="@color/dorado"/>
+                android:textColor="@color/dorado"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvAltura"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pokedex Data"
                 android:layout_marginStart="10dp"/>
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -206,17 +209,18 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ancho"
-                android:textStyle="bold"
-                android:textColor="@color/dorado"/>
+                android:text="Peso"
+                android:textColor="@color/dorado"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvPeso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pokedex Data"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="10dp" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -226,25 +230,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Habilidades"
-                android:textStyle="bold"
-                android:textColor="@color/dorado"/>
+                android:textColor="@color/dorado"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvHabilidades"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pokedex Data"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="10dp" />
 
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Formación"
-            android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
-            android:textColor="@color/green_house"/>
+            android:text="Formación"
+            android:textColor="@color/green_house"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -254,14 +258,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rendimiento"
-                android:textStyle="bold"
-                android:textColor="@color/dorado"/>
+                android:text="Estadisticas"
+                android:textColor="@color/dorado"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvEstadisticas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pokedex Data"
                 android:layout_marginStart="10dp"/>
 
         </LinearLayout>
@@ -274,18 +278,17 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tasa"
-                android:textStyle="bold"
-                android:textColor="@color/dorado"/>
+                android:text="Tipo"
+                android:textColor="@color/dorado"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvTipo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pokedex Data"
-                android:layout_marginStart="10dp"/>
+                android:layout_marginStart="10dp" />
 
         </LinearLayout>
-
 
 
     </LinearLayout>
@@ -306,5 +309,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/btnSavePokemon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

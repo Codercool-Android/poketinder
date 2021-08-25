@@ -1,5 +1,6 @@
 package com.abeltarazona.poketinder.data.core
 
+import com.abeltarazona.poketinder.data.core.response.PokemonDetailResponse
 import com.abeltarazona.poketinder.data.core.response.PokemonListResponse
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -35,7 +36,7 @@ class RestClient {
 
             retrofit = Retrofit.Builder()
                 .client(client)
-                .baseUrl("https://pokeapi.co/api/v2/pokemon")
+                .baseUrl("https://pokeapi.co/api/v2/pokemon/")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
         }
@@ -48,12 +49,13 @@ class RestClient {
             return res.body()
         }
 
-        /*fun getCategoryProducts(): CategoryStoresResponse? {
+        fun getPokemonDetail(id: String) : PokemonDetailResponse? {
             initIfNull()
-            val api: MarketApi = retrofit!!.create(MarketApi::class.java)
-            val res: Response<CategoryStoresResponse> = api.callGetCategoriesProducts().execute()
+            val api: PokemonApi = retrofit!!.create(PokemonApi::class.java)
+            val res: Response<PokemonDetailResponse> =
+                api.getPokemonDetail(id).execute()
             return res.body()
-        }*/
+        }
     }
 
 }

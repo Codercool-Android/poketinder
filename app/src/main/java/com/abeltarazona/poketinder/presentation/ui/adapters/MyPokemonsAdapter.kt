@@ -35,9 +35,7 @@ class MyPokemonsAdapter(val list: List<Pokemon>) :
 
         fun bind(pokemon: Pokemon) {
             with(binding) {
-
-                val position = adapterPosition + 1
-                tvIndex.text = formatNumberTo3Digits(position)
+                tvIndex.text = formatNumberTo3Digits(pokemon.idPokemon.toInt())
                 tvName.text = pokemon.name
                 tvType.text = if (pokemon.isLegendary) "Legendary" else "Normal"
                 Glide

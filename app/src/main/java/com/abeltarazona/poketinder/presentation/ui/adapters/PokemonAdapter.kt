@@ -4,13 +4,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.abeltarazona.poketinder.R
-import com.abeltarazona.poketinder.data.PokemonMock
+import com.abeltarazona.poketinder.data.core.response.PokemonListResponse
 import com.abeltarazona.poketinder.databinding.ItemPokemonBinding
 import com.abeltarazona.poketinder.presentation.utils.inflate
 import com.bumptech.glide.Glide
 
 class PokemonAdapter(
-    private val list: List<PokemonMock>,
+    private val list: List<PokemonListResponse.Pokemon>,
     val callback: Callback
 ) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
@@ -30,29 +30,25 @@ class PokemonAdapter(
 
         private val binding = ItemPokemonBinding.bind(view)
 
-        fun bind(pokemon: PokemonMock) {
+        fun bind(pokemon: PokemonListResponse.Pokemon) {
             with(binding) {
                 root.setOnClickListener {
-                    val position = adapterPosition + 1
-
-                    val newPokemon = pokemon.copy(position = position)
-
-                    callback.onClickPokemonInformation(newPokemon)
+                    callback.onClickPokemonInformation(pokemon)
                 }
                 tvName.text = pokemon.name
                 Glide
                     .with(itemView)
-                    .load(pokemon.img)
+                    .load(pokemon.getPokemonImage())
                     .into(binding.ivPokemon)
-                if (pokemon.legendary) {
+                /*if (pokemon.legendary) {
                     ivVerified.visibility = View.VISIBLE
-                }
+                }*/
             }
         }
 
     }
 
     interface Callback {
-        fun onClickPokemonInformation(pokemon: PokemonMock)
+        fun onClickPokemonInformation(pokemon: PokemonListResponse.Pokemon)
     }
 }
