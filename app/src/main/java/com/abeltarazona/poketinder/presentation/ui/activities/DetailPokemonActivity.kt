@@ -97,6 +97,40 @@ class DetailPokemonActivity :
     }
 
     override fun onGetDetailPokemonSuccess(response: PokemonDetailResponse) {
+        binding.tvExperienciaBase.text = response.base_experience.toString()
+        binding.tvAltura.text = response.height.toString()
+        binding.tvPeso.text = response.weight.toString()
+
+        val listHabilidades = response.abilities
+        var habilidades = ""
+
+        for (item in listHabilidades) {
+            val ability = item.ability.name
+            habilidades += " $ability,"
+        }
+
+        binding.tvHabilidades.text = habilidades.dropLast(1)
+
+        val listEstadisticas = response.stats
+        var estadisticas = ""
+
+        for (item in listEstadisticas) {
+            val stat = "${item.stat.name} : ${item.base_stat}"
+            estadisticas += "$stat || "
+        }
+
+        binding.tvEstadisticas.text = estadisticas.dropLast(4)
+
+        val listTipo = response.types
+
+        var tipos = ""
+
+        for (item in listTipo) {
+            val type = item.type.name
+            tipos += " $type,"
+        }
+
+        binding.tvTipo.text = tipos.dropLast(1)
 
     }
 

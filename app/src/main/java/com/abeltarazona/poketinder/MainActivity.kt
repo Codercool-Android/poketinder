@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -45,6 +47,39 @@ class MainActivity :
 
         binding.btnMyPokemons.setOnClickListener {
             startActivity(Intent(this, MyPokemonsActivity::class.java))
+        }
+
+        binding.floatingActionButton.setOnClickListener {
+            // Rewind
+            val setting = RewindAnimationSetting.Builder()
+                .setDirection(Direction.Bottom)
+                .setDuration(Duration.Normal.duration)
+                .setInterpolator(DecelerateInterpolator())
+                .build()
+            manager.setRewindAnimationSetting(setting)
+            binding.rvTinderPokemon.rewind()
+        }
+
+        binding.floatingActionButton2.setOnClickListener {
+            // Skip
+            val setting = SwipeAnimationSetting.Builder()
+                .setDirection(Direction.Left)
+                .setDuration(Duration.Normal.duration)
+                .setInterpolator(AccelerateInterpolator())
+                .build()
+            manager.setSwipeAnimationSetting(setting)
+            binding.rvTinderPokemon.swipe()
+        }
+
+        binding.floatingActionButton3.setOnClickListener {
+            // Like
+            val setting = SwipeAnimationSetting.Builder()
+                .setDirection(Direction.Right)
+                .setDuration(Duration.Normal.duration)
+                .setInterpolator(DecelerateInterpolator())
+                .build()
+            manager.setSwipeAnimationSetting(setting)
+            binding.rvTinderPokemon.swipe()
         }
 
         fetchPokemonApi()
@@ -126,6 +161,10 @@ class MainActivity :
     override fun onPokemonListSuccess(list: List<PokemonListResponse.Pokemon>) {
         listPokemon.addAll(list)
         adapter.notifyDataSetChanged()
+
+        binding.floatingActionButton.visibility = View.VISIBLE
+        binding.floatingActionButton2.visibility = View.VISIBLE
+        binding.floatingActionButton3.visibility = View.VISIBLE
     }
 
     override fun showProgress() {
