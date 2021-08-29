@@ -1,5 +1,6 @@
 package com.abeltarazona.poketinder.presentation.ui.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -32,6 +33,10 @@ class OnboardingActivity :
                 setCurrentIndicator(position)
             }
         })
+
+        binding.layBackButton.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
     }
 
     private fun setupIndicator() {

@@ -14,11 +14,7 @@
         <activity
             android:name=".presentation.ui.activities.OnboardingActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity
@@ -34,7 +30,11 @@
         <activity android:name=".presentation.ui.activities.LoginActivity" />
         <activity android:name=".presentation.ui.activities.IntroActivity" />
         <activity android:name=".presentation.ui.activities.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
 

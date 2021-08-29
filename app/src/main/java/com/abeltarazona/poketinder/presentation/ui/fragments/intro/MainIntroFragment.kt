@@ -10,6 +10,7 @@ import com.abeltarazona.poketinder.databinding.FragmentMainIntroBinding
 import com.abeltarazona.poketinder.presentation.presenters.implementation.MainIntroImpl
 import com.abeltarazona.poketinder.presentation.presenters.interfaces.MainIntroPresenter
 import com.abeltarazona.poketinder.presentation.ui.activities.LoginActivity
+import com.abeltarazona.poketinder.presentation.ui.activities.OnboardingActivity
 import com.abeltarazona.poketinder.presentation.ui.fragments.BaseFragment
 import com.abeltarazona.poketinder.presentation.utils.SharedPreferenceUtil
 import com.zygne.zygnearchitecture.domain.executor.implementation.ThreadExecutor
@@ -35,9 +36,8 @@ class MainIntroFragment :
             AndroidThread.getInstance(), this)
 
         binding.btnYes.setOnClickListener {
-            //presenter.convertToWelcomeMessage("Abel Tarazona")
             sharedPreferenceUtil.saveIntroShow()
-            startActivity(Intent(context, LoginActivity::class.java))
+            startActivity(Intent(context, OnboardingActivity::class.java))
         }
 
         binding.btnNo.setOnClickListener {
